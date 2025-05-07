@@ -1,0 +1,13 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% extends "base.html" %}
+
+{% block title %}JournalAi Home{% endblock %}
+{% block stylesheet %}
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock%}
+{% block body_class %} {% endblock %}
+{% block content %}
+
+
+{% endblock %}
