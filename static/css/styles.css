@@ -1,0 +1,35 @@
+html {
+    scroll-behavior: smooth;
+  }  
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Inter', sans-serif;
+}
+
+.home-page{
+    background-image: url("/static/assets/img/home_page.jpg");
+}
+
+.card-glass{
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    color: white;
+}  
+.arrow-down {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+  
+.learn-link:hover .arrow-down {
+    transform: translateY(3px);
+}
+  
+  
+#how-it-works {
+    margin-top: 25em;
+    padding-top: 15rem;
+    color: white;
+}

@@ -3,11 +3,13 @@ import boto3
 import os
 from dotenv import load_dotenv
 from datetime import datetime
+from flask_bootstrap import Bootstrap5
 
 
 # Load secrets
 load_dotenv()
 app = Flask(__name__)
+bootstrap = Bootstrap5(app)
 
 
 @app.route("/", methods=["GET", "POST"])
