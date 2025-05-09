@@ -1,7 +1,7 @@
 {% from "bootstrap5/form.html" import render_form %}
 {% extends "base.html" %}
 
-{% block title %}JournalAi Home{% endblock %}
+{% block title %}JournalAI{% endblock %}
 {% block stylesheet %}
     {{ bootstrap.load_css() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -9,7 +9,16 @@
 {% block body_class %}home-page{% endblock %}
 {% block content %}
 <div class="container">
-    <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card card-glass rounded-5 justify-content-center align-items-center">
+            <img src="../static/assets/img/logo.png" width="30%">
+            <a href="#welcome" class="learn-link text-muted text-center align-items-center pb-3 text-decoration-none">
+                <span>Start Journaling!</span><br>
+                <span class="fs-4 arrow-down">&#x2193;</span>
+            </a> 
+        </div>
+    </div>
+    <div id="welcome" class="d-flex flex-column justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow-lg text-center rounded-5 w-85 card-glass">
             <h1 class="display-4 fw-bold mb-3">Welcome to JournalAi!</h1>
             <p class="mb-4 lead fst-italic text-muted">
@@ -32,9 +41,29 @@
             </a>                
         </div>      
     </div>
-    <div id="how-it-works" class="">
-        <h2 class="text-center mb-4">How It Works</h2>
-        <!-- Explanation -->
-    </div>
+    <div id="how-it-works" class="container shadow-lg card-glass rounded-5">
+        <h2 class="text-center mb-5">How It Works</h2>
+      
+        <div class="row text-center">
+          <div class="col-md-4 mb-4 ">
+            <div class="mb-3 fs-1">📝</div>
+            <h5 class="fw-semibold">Write Daily</h5>
+            <p class="text-muted">Respond to thoughtful prompts that encourage clarity, growth, and focus.</p>
+          </div>
+      
+          <div class="col-md-4 mb-4">
+            <div class="mb-3 fs-1">📊</div>
+            <h5 class="fw-semibold">Track Progress</h5>
+            <p class="text-muted">See your journaling streaks and milestones as you build consistency.</p>
+          </div>
+      
+          <div class="col-md-4 mb-4">
+            <div class="mb-3 fs-1">💡</div>
+            <h5 class="fw-semibold">Gain Insights</h5>
+            <p class="text-muted">AI summarizes patterns and trends to help you understand yourself better.</p>
+          </div>
+        </div>
+      </div>
+      
 </div>
 {% endblock %}
