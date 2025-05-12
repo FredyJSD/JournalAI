@@ -27,12 +27,11 @@ body {
 .learn-link:hover .arrow-down {
     transform: translateY(3px);
 }
-  
-  
+   
 #how-it-works {
     color: white;
     margin-top: 25em;
-    margin-bottom: 10em;
+    margin-bottom: 15em;
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
