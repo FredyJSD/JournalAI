@@ -1,5 +1,0 @@
-flask
-boto3
-python-dotenv
-Bootstrap-Flask==2.4.2
-

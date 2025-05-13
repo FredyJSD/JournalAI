@@ -6,6 +6,7 @@ from datetime import datetime
 from flask_bootstrap import Bootstrap5
 import requests
 from functools import wraps
+from jose import jwt
 
 
 
@@ -22,6 +23,8 @@ CLIENT_ID = os.getenv('CLIENT_ID')
 REDIRECT_URI = 'http://localhost:5000/callback'
 TOKEN_URL = f'https://{COGNITO_DOMAIN}/oauth2/token'
 LOGOUT_URL = f'https://{COGNITO_DOMAIN}/logout?client_id={CLIENT_ID}&logout_uri=http://localhost:5000/'
+COGNITO_USERPOOL_ID = os.getenv('COGNITO_USERPOOL_ID')
+COGNITO_REGION = os.getenv('COGNITO_REGION')
 
 
 def login_required(f):
@@ -57,14 +60,16 @@ def signup():
         f'&redirect_uri={REDIRECT_URI}'
     )
     return redirect(hosted_ui_url)
-    
+
 
 @app.route("/callback", methods=["GET", "POST"]) #Using for Cognito Hosted UI
 def callback():
-    code = request.args.get('code')
+    code = request.args.get('code') #Grabs code from header
     if not code:
         return 'Missing code', 400
 
+    #Prepares the data for the OAuth2 token exchange.
+    #Standard OAuth2 Authorization Code Grant request
     data = {
         'grant_type': 'authorization_code',
         'client_id': CLIENT_ID,
@@ -72,23 +77,34 @@ def callback():
         'redirect_uri': REDIRECT_URI
     }
 
-    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    headers = {'Content-Type': 'application/x-www-form-urlencoded'} #OAuth2 expects application/x-www-form-urlencoded data.
 
-    response = requests.post(TOKEN_URL, data=data, headers=headers)
+    #Sends code and client info to exchange it for tokens
+    response = requests.post(TOKEN_URL, data=data, headers=headers) #POST request to Cognito's token endpoint.
     if response.status_code != 200:
         return f'Error exchanging code: {response.text}', 400
 
-    tokens = response.json()
+    tokens = response.json() #Parses the JSON response containing tokens.
+
+    #Saves the ID token and Access token into the Flask session
     session['id_token'] = tokens['id_token']
     session['access_token'] = tokens['access_token']
 
     return redirect('/dashboard')
 
 
-@login_required
+# @login_required
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    return render_template("dashboard.html")
+    id_token = session.get('id_token')
+    
+    # Decode the ID token
+    decoded_token = jwt.get_unverified_claims(id_token)
+
+    user_email = decoded_token.get('email', 'Unknown')
+    user_name = decoded_token.get('name', 'User')
+
+    return render_template("dashboard.html", user_email=user_email, user_name=user_name)
 
 
 @app.route('/logout')
