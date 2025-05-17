@@ -9,23 +9,37 @@
 {% block body_class %}home-page{% endblock %}
 {% block content %}
 <div class="container">
-    <div class="d-flex justify-content-center align-items-center vh-100">
+    <div id="greet-user" class="d-flex justify-content-center align-items-center vh-100">
         <div class="card card-glass rounded-5 justify-content-center align-items-center">
             <img src="../static/assets/img/logo.png" width="20%">
-            
+            <h1> Hello {{user_name}}</h1>
         </div>
     </div>
+
+    <div id="new-entry" class="vh-100">
+        <button>New Entry</button>
+    </div>
+
+    <div id="trends" class="vh-100">
+        <h2>Streak 🔥: 8 days in a row</h2>
+        <p>😃 Mood trend: Mostly positive this week</p>
+    </div>
+
+    <div id="request-insights" class="vh-100">
+        <h3>📅 Request Insight: </h3>
+        <button>Recap my week</button>
+        <button>Recap my month</button>
+        <button>Deeper Insight</button>
+    </div>
+
     <div id="journal-entries" class="d-flex flex-column justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow-lg text-center rounded-5 w-85 card-glass">
-            <h1 class="display-4 fw-bold mb-3">Hello {{user_name}}</h1>
-            
-            <a href="#how-it-works" class="learn-link text-muted text-center align-items-center mt-4 text-decoration-none">
-                <span>Learn More</span><br>
-                <span class="fs-4 arrow-down">&#x2193;</span>
-            </a>                
+            <h3 class="fw-bold mb-3">Recent Entries:</h3>     
+            <p>😊 May 6: "Summary snippet..." <a>View</a></p>    
+            <p>😐 May 5: "Summary snippet..." <a>View</a></p>   
+            <p>😴 May 4: "Summary snippet..." <a>View</a></p>
         </div>      
     </div>
 
-      
 </div>
 {% endblock %}

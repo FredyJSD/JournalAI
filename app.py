@@ -1,3 +1,5 @@
+import base64
+import json
 from flask import Flask, render_template, request, redirect, url_for, session
 import boto3
 import os
@@ -35,6 +37,24 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+
+#For testing use only
+def generate_fake_jwt():
+    header = {
+        "alg": "none",
+        "typ": "JWT"
+    }
+
+    payload = {
+        "email": "test@example.com",
+        "name": "Test User"
+    }
+
+    header_b64 = base64.urlsafe_b64encode(json.dumps(header).encode()).rstrip(b'=')
+    payload_b64 = base64.urlsafe_b64encode(json.dumps(payload).encode()).rstrip(b'=')
+
+    fake_token = header_b64 + b'.' + payload_b64 + b'.'
+    return fake_token.decode()
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -96,6 +116,10 @@ def callback():
 # @login_required
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
+    #For testing
+    if 'id_token' not in session:
+        session['id_token'] = generate_fake_jwt()
+
     id_token = session.get('id_token')
     
     # Decode the ID token
