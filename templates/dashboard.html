@@ -6,38 +6,54 @@
     {{ bootstrap.load_css() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock%}
-{% block body_class %}home-page{% endblock %}
+{% block body_class %}dashboard{% endblock %}
 {% block content %}
 <div class="container">
+    
     <div id="greet-user" class="d-flex justify-content-center align-items-center vh-100">
         <div class="card card-glass rounded-5 justify-content-center align-items-center">
-            <img src="../static/assets/img/logo.png" width="20%">
-            <h1> Hello {{user_name}}</h1>
+            <img src="../static/assets/img/logo.png" width="10%" alt="Logo">
+            <h1 class="mb-0 fw-semibold text-dark mb-1"> Hello {{user_name}}!</h1>
+            <p class="text-muted fst-italic my-3">Glad to see you journaling again.</p>
+            <a href="#" class="btn btn-dark px-4 py-2 me-2 rounded-pill">New Entry</a>
+            <a href="#trends" class="learn-link text-muted text-center align-items-center mt-4 text-decoration-none">
+                <span>Trends</span><br>
+                <span class="fs-4 arrow-down">&#x2193;</span>
+            </a>    
         </div>
     </div>
 
-    <div id="new-entry" class="vh-100">
-        <button>New Entry</button>
+    <div id="trends" class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card card-glass rounded-5 justify-content-center align-items-center text-dark py-3">
+            <h2 class="mb-3">Streak 🔥: 8 days in a row</h2>
+            <p>😃 Mood trend: Mostly positive this week</p>
+            <a href="#request-insights" class="learn-link text-muted text-center align-items-center mt-2 text-decoration-none">
+                <span>Insights</span><br>
+                <span class="fs-4 arrow-down">&#x2193;</span>
+            </a>  
+        </div>  
     </div>
 
-    <div id="trends" class="vh-100">
-        <h2>Streak 🔥: 8 days in a row</h2>
-        <p>😃 Mood trend: Mostly positive this week</p>
-    </div>
-
-    <div id="request-insights" class="vh-100">
-        <h3>📅 Request Insight: </h3>
-        <button>Recap my week</button>
-        <button>Recap my month</button>
-        <button>Deeper Insight</button>
+    <div id="request-insights" class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card card-glass rounded-5 justify-contnet-center align-items-center rounded-5 text-dark py-4">
+            <h3>📅 Request Insight: </h3>
+            <a href="#" class="btn btn-dark px-4 py-2 me-2 rounded-pill my-2">Recap my week</a>
+            <a href="#" class="btn btn-dark px-4 py-2 me-2 rounded-pill my-2">Recap my month</a>
+            <a href="#" class="btn btn-dark px-4 py-2 me-2 rounded-pill my-2">Deeper Insights</a>
+            <a href="#journal-entries" class="learn-link text-muted text-center align-items-center mt-4 text-decoration-none">
+                <span>Previous Journal Entries</span><br>
+                <span class="fs-4 arrow-down">&#x2193;</span>
+            </a>    
+        </div>
     </div>
 
     <div id="journal-entries" class="d-flex flex-column justify-content-center align-items-center vh-100">
-        <div class="card p-4 shadow-lg text-center rounded-5 w-85 card-glass">
+        <div class="card p-4 shadow-lg text-center rounded-5 w-85 card-glass text-dark">
             <h3 class="fw-bold mb-3">Recent Entries:</h3>     
             <p>😊 May 6: "Summary snippet..." <a>View</a></p>    
             <p>😐 May 5: "Summary snippet..." <a>View</a></p>   
             <p>😴 May 4: "Summary snippet..." <a>View</a></p>
+            <a href="#" class="btn btn-dark px-4 py-2 me-2 rounded-pill">View More Entries</a>
         </div>      
     </div>
 
